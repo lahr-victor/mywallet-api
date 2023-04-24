@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 // VALUE IMPORTS
 import { db } from '../database/database.connection.js';
 
-// FUNCTIONS
-async function createTransaction(req, res) {
+// VALUE EXPORTS
+export async function createTransaction(req, res) {
   try {
     const { session } = res.locals;
 
@@ -21,5 +21,13 @@ async function createTransaction(req, res) {
   }
 }
 
-// VALUE EXPORTS
-export default createTransaction;
+export async function retrieveTransactions(req, res) {
+  try {
+    const { session } = res.locals;
+
+    const transactions = await db.collection('transactions').find({ userId: session.userId }).toArray();
+    return res.send(transactions);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
