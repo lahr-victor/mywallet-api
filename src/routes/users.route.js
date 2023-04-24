@@ -2,15 +2,16 @@
 import { Router } from 'express';
 
 // VALUE IMPORTS
-import signUp from '../controllers/users.controller.js';
+import { signUp, signIn } from '../controllers/users.controller.js';
+import { signUpSchema, signInSchema } from '../schemas/users.schema.js';
 import validateSchema from '../middlewares/validadeSchema.middleware.js';
-import userSchema from '../schemas/users.schema.js';
 
 // GLOBAL CONSTANTS
 const usersRouter = Router();
 
 // FUNCTIONS
-usersRouter.post('/sign-up', validateSchema(userSchema), signUp);
+usersRouter.post('/sign-up', validateSchema(signUpSchema), signUp);
+usersRouter.post('/sign-in', validateSchema(signInSchema), signIn);
 
 // VALUE EXPORTS
 export default usersRouter;

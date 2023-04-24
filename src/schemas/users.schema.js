@@ -1,12 +1,14 @@
 // PACKAGE IMPORTS
 import joi from 'joi';
 
-// GLOBAL CONSTANTS
-const userSchema = joi.object({
+// VALUE EXPORTS
+export const signUpSchema = joi.object({
   name: joi.string().min(1).required(),
   email: joi.string().email().required(),
   password: joi.string().min(3).required(),
 });
 
-// VALUE EXPORTS
-export default userSchema;
+export const signInSchema = joi.object({
+  email: joi.string().email().required(),
+  password: joi.string().min(3).required(),
+});

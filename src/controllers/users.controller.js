@@ -1,11 +1,12 @@
 // PACKAGE IMPORTS
 import bcrypt from 'bcrypt';
+import { v4 as uuid } from 'uuid';
 
 // VALUE IMPORTS
 import { db } from '../database/database.connection.js';
 
-// FUNCTIONS
-async function signUp(req, res) {
+// VALUE EXPORTS
+export async function signUp(req, res) {
   const { name, email, password } = req.body;
 
   try {
@@ -20,5 +21,20 @@ async function signUp(req, res) {
   }
 }
 
-// VALUE EXPORTS
-export default signUp;
+export async function signIn(req, res) {
+  const { email, password } = req.body;
+
+  try {
+    const user = await db.collection('users').findOne({ email });
+    if (!user) return res.status(404).send('This e-mail address is not registered!');
+
+    const correctPassword = bcrypt.compareSync(password, user.password);
+    if (!correctPassword) return res.status(401).send('Password is incorrect! Please try again.');
+
+    const token = uuid();
+    await db.collection('sessions').insertOne({ token, userId: user._id });
+    return res.status(200).send(token);
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
