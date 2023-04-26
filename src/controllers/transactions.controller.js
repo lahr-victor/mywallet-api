@@ -25,7 +25,12 @@ export async function retrieveTransactions(req, res) {
   try {
     const { session } = res.locals;
 
-    const transactions = await db.collection('transactions').find({ userId: session.userId }).toArray();
+    const transactions = (
+      await db.collection('transactions')
+        .find({ userId: session.userId })
+        .sort({ date: -1 })
+        .toArray()
+    );
     return res.send(transactions);
   } catch (error) {
     return res.status(500).send(error.message);
