@@ -18,7 +18,7 @@ export async function createTransaction(req, res) {
   }
 
   try {
-    await db.collection('transactions').insertOne({ transaction });
+    await db.collection('transactions').insertOne(transaction);
     return res.sendStatus(201);
   } catch (error) {
     return res.status(500).send(error.message);
