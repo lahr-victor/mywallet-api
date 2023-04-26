@@ -6,15 +6,19 @@ import { db } from '../database/database.connection.js';
 
 // VALUE EXPORTS
 export async function createTransaction(req, res) {
+  const { session } = res.locals;
+
+  const { value, description, type } = req.body;
+  const transaction = {
+    value: (Number(value)),
+    description,
+    type,
+    date: dayjs().toISOString(),
+    userId: session.userId,
+  }
+
   try {
-    const { session } = res.locals;
-
-    await db.collection('transactions').insertOne({
-      ...req.body,
-      date: dayjs().toISOString(),
-      userId: session.userId,
-    });
-
+    await db.collection('transactions').insertOne({ transaction });
     return res.sendStatus(201);
   } catch (error) {
     return res.status(500).send(error.message);
