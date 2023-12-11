@@ -108,11 +108,11 @@ Para executar este projeto em desenvolvimento, é necessário seguir os passos a
 - Criar o arquivo `.env` com base no `.env-example`;
 - Este arquivo `.env` é composto pelas seguintes propriedades:
 ```
-	# server
-		PORT=5000
+# server
+	PORT=5000
 
-	# local development database
-		DATABASE_URL=mongodb://localhost:27017/mywallet-db
+# local development database
+	DATABASE_URL=mongodb://localhost:27017/mywallet-db
 
 ```
 - A propriedade `PORT` é usada para declarar a porta onde o servidor rodará;
