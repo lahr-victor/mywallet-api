@@ -1,7 +1,5 @@
-// VALUE IMPORTS
 import { db } from '../database/database.connection.js';
 
-// FUNCTIONS
 async function authenticateSession(req, res, next) {
   const { authorization } = req.headers;
   const token = authorization?.replace("Bearer ", "");
@@ -18,5 +16,4 @@ async function authenticateSession(req, res, next) {
   }
 }
 
-// VALUE EXPORTS
 export default authenticateSession;

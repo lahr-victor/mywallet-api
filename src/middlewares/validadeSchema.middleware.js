@@ -1,4 +1,3 @@
-// FUNCTIONS
 function validateSchema(schema) {
   return (req, res, next) => {
     const validation = schema.validate(req.body, { abortEarly: false });
@@ -11,5 +10,4 @@ function validateSchema(schema) {
   };
 }
 
-// VALUE EXPORTS
 export default validateSchema;

@@ -1,10 +1,7 @@
-// PACKAGE IMPORTS
 import dayjs from 'dayjs';
 
-// VALUE IMPORTS
 import { db } from '../database/database.connection.js';
 
-// VALUE EXPORTS
 export async function createTransaction(req, res) {
   const { session } = res.locals;
 

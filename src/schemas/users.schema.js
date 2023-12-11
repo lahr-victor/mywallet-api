@@ -1,7 +1,5 @@
-// PACKAGE IMPORTS
 import joi from 'joi';
 
-// VALUE EXPORTS
 export const signUpSchema = joi.object({
   name: joi.string().min(1).required(),
   email: joi.string().email().required(),

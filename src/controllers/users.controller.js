@@ -1,11 +1,8 @@
-// PACKAGE IMPORTS
 import bcrypt from 'bcrypt';
 import { v4 as uuid } from 'uuid';
 
-// VALUE IMPORTS
 import { db } from '../database/database.connection.js';
 
-// VALUE EXPORTS
 export async function signUp(req, res) {
   const { name, email, password } = req.body;
 
